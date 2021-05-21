@@ -5,40 +5,77 @@ void setup() {
   Serial.begin(115200);
   pinMode(8, OUTPUT);
   pinMode(7, OUTPUT);
+  pinMode(6, OUTPUT);
   pinMode(A0, INPUT);
 }
 
 void loop() {
   if (Serial.available()){
     state = Serial.parseInt();
-    if (state == 2){z200(); readVoltage();}
-    if (state == 4){z400(); readVoltage();}
-    if (state == 6){z600(); readVoltage();}
+    if (state == 1){z200Load0(); readVoltage();}
+    if (state == 2){z400Load0(); readVoltage();}
+    if (state == 3){z600Load0(); readVoltage();}
+    if (state == 4){z200Load100(); readVoltage();}
+    if (state == 5){z400Load100(); readVoltage();}
+    if (state == 6){z600Load100(); readVoltage();}
   }
   else {
-    if (state == 2){z200(); readVoltage();}
-    if (state == 4){z400(); readVoltage();}
-    if (state == 6){z600(); readVoltage();}
+    if (state == 1){z200Load0(); readVoltage();}
+    if (state == 2){z400Load0(); readVoltage();}
+    if (state == 3){z600Load0(); readVoltage();}
+    if (state == 4){z200Load100(); readVoltage();}
+    if (state == 5){z400Load100(); readVoltage();}
+    if (state == 6){z600Load100(); readVoltage();}
   }
 }
 
-void z200() {
+void z200Load0() {
     delay(100);
     digitalWrite(7, HIGH);
     delay(100);
     digitalWrite(8, HIGH);
+    delay(100);
+    digitalWrite(6, HIGH);
   }
-void z400() {
+void z400Load0() {
     delay(100);
     digitalWrite(7, LOW);
     delay(100);
     digitalWrite(8, LOW);
+    delay(100);
+    digitalWrite(6, HIGH);
   }
-void z600() {
+void z600Load0() {
     delay(100);
     digitalWrite(7, HIGH);
     delay(100);
     digitalWrite(8, LOW);
+    delay(100);
+    digitalWrite(6, HIGH);
+  }
+void z200Load100() {
+    delay(100);
+    digitalWrite(7, HIGH);
+    delay(100);
+    digitalWrite(8, HIGH);
+    delay(100);
+    digitalWrite(6, LOW);
+  }
+void z400Load100() {
+    delay(100);
+    digitalWrite(7, LOW);
+    delay(100);
+    digitalWrite(8, LOW);
+    delay(100);
+    digitalWrite(6, LOW);
+  }
+void z600Load100() {
+    delay(100);
+    digitalWrite(7, HIGH);
+    delay(100);
+    digitalWrite(8, LOW);
+    delay(100);
+    digitalWrite(6, LOW);
   }
   
 void readVoltage() {
